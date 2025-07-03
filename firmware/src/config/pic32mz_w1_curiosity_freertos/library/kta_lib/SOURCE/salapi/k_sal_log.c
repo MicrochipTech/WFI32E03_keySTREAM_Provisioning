@@ -1,0 +1,102 @@
+/*******************************************************************************
+*************************keySTREAM Trusted Agent ("KTA")************************
+
+* (c) 2023-2024 Nagravision Sàrl
+
+* Subject to your compliance with these terms, you may use the Nagravision Sàrl
+* Software and any derivatives exclusively with Nagravision's products. It is your
+* responsibility to comply with third party license terms applicable to your
+* use of third party software (including open source software) that may accompany
+* Nagravision Software.
+
+* Redistribution of this Nagravision Software in source or binary form is allowed
+* and must include the above terms of use and the following disclaimer with the
+* distribution and accompanying materials.
+
+* THIS SOFTWARE IS SUPPLIED BY NAGRAVISION "AS IS". NO WARRANTIES, WHETHER EXPRESS,
+* IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED WARRANTIES OF
+* NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE. IN NO
+* EVENT WILL NAGRAVISION BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, INCIDENTAL
+* OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND WHATSOEVER RELATED TO
+* THE SOFTWARE, HOWEVER CAUSED, EVEN IF NAGRAVISION HAS BEEN ADVISED OF THE
+* POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE FULLEST EXTENT ALLOWED BY LAW,
+* NAGRAVISION 'S TOTAL LIABILITY ON ALL CLAIMS IN ANY WAY RELATED TO THIS
+* SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, THAT YOU HAVE PAID DIRECTLY
+* TO NAGRAVISION FOR THIS SOFTWARE.
+********************************************************************************/
+/** \brief  SAL log for microchip.
+ *
+ *  \author Kudelski IoT
+ *
+ *  \date 2023/06/12
+ *
+ *  \file k_sal_log.c
+ ******************************************************************************/
+
+/**
+ * @brief SAL log for microchip.
+ */
+
+#include "k_sal_log.h"
+/* -------------------------------------------------------------------------- */
+/* IMPORTS                                                                    */
+/* -------------------------------------------------------------------------- */
+
+#include <stdio.h>
+#include "system/console/sys_console.h"
+/* -------------------------------------------------------------------------- */
+/* LOCAL CONSTANTS, TYPES, ENUM                                               */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/* LOCAL VARIABLES                                                            */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/* LOCAL FUNCTIONS - PROTOTYPE                                                */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/* PUBLIC VARIABLES                                                           */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/* PUBLIC FUNCTIONS - IMPLEMENTATION                                          */
+/* -------------------------------------------------------------------------- */
+
+#define DelayNop(x,y) { unsigned int dly1; unsigned int dly2; for (dly1=0;dly1<x;dly1++) for (dly2=0;dly2<y;dly2++) { asm("nop"); } } 
+
+
+/**
+ * @brief
+ *   This api will have the data buffer as input and will print on console to provide logs.
+ *   If required platform specific definition to be updated by the user.
+ *
+ * @param[in] xpBuffer
+ *   Address of buffer containing input data
+ */
+/** 
+ * SUPPRESS: MISRA_DEV_KTA_003 : misra_c2012_rule_21.6_violation
+ * SUPPRESS: MISRA_DEV_KTA_001 : misra_c2012_rule_17.1_violation
+ * Using printf for logging.
+ * Not checking the return status of printf, since not required.
+ **/
+void salPrint
+(
+  char* xpBuffer
+)
+{
+  //printf("%s", xpBuffer);
+  SYS_CONSOLE_PRINT(xpBuffer, NULL);  
+    DelayNop(1,20000);
+  SYS_CONSOLE_Flush(SYS_CONSOLE_DEFAULT_INSTANCE);
+}
+
+/* -------------------------------------------------------------------------- */
+/* LOCAL FUNCTIONS - IMPLEMENTATION                                           */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/* END OF FILE                                                                */
+/* -------------------------------------------------------------------------- */
+
