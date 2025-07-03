@@ -525,8 +525,8 @@ extern "C" {
 
 #define SYS_WIFI_MAX_CBS					1
 #define SYS_WIFI_COUNTRYCODE        	    "GEN"
-#define SYS_WIFI_STA_SSID        			"FRITZ!Box 7590 AN"
-#define SYS_WIFI_STA_PWD        			"04260389004400809808"
+#define SYS_WIFI_STA_SSID        			""
+#define SYS_WIFI_STA_PWD        			""
 #define SYS_WIFI_STA_AUTHTYPE				SYS_WIFI_WPA2
 #define SYS_WIFI_STA_AUTOCONNECT   			true
 

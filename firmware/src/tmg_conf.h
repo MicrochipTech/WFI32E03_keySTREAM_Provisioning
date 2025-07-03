@@ -55,13 +55,13 @@ extern "C" {
 /* -------------------------------------------------------------------------- */
 
 /** @brief Wifi SSID for TrustManaged device */
-#define WIFI_SSID                           "FRITZ!Box 7590 AN"
+#define WIFI_SSID                           ""
 
 /** @brief Wifi password for TrustManaged device */
-#define WIFI_PWD                            "04260389004400809808"
+#define WIFI_PWD                            ""
 
 /** @brief TrustManaged Device Public UID */
-#define KEYSTREAM_DEVICE_PUBLIC_PROFILE_UID "FDHK:TM-DC-EVALUATION"
+#define KEYSTREAM_DEVICE_PUBLIC_PROFILE_UID ""
 
 /** @brief keySTREAM COAP Endpoint */
 #define KEYSTREAM_COAP_URL                  (const uint8_t*)"icpp.mss.iot.kudelski.com"
