@@ -30,10 +30,11 @@ Checkout the <a href="https://microchipsupport.force.com/s/" target="_blank">Tec
     - [CryptoAuth TrustMANAGER Board](#cryptoauth-trustmanager-board)
     - [MPLAB® PICkit™ 4 In-Circuit Debugger](#mplab-pickit-4-in-circuit-debugger)
 - [Software Setup](#software-setup)
-    - [Development Tools:](#development-tools)
-    - [MCC Content Library:](#mcc-content-library)
-    - [others:](#others)
+    - [Development Tools](#development-tools)
+    - [MCC Content Library](#mcc-content-library)
+    - [others](#others)
 - [Firmware](#firmware)
+- [Run the Demo](#run-the-demo)
 - [Links](#links)
 
 
@@ -107,14 +108,14 @@ Once a successful connection to the MQTT broker has been establisch, the applica
 [TOP](#contents)
 
 ## Software Setup
-#### <u>Development Tools:</u>
+#### <u>Development Tools</u>
   - MPLAB® X IDE v6.20
   - MPLAB® X IDE plug-ins: MPLAB® Code Configurator (MCC) v5.7.1 and above
   - MPLAB® XC32 C/C++ Compiler v4.10
   - MPLAB® Harmony v3
   - Device Pack: PIC32MZ-W_DFP (1.8.326)
 	
-#### <u>MCC Content Library:</u>
+#### <u>MCC Content Library</u>
 |  Harmony v3 Component | version |
 | :- | :- |
 | bsp | v3.22.0 |
@@ -132,7 +133,7 @@ Once a successful connection to the MQTT broker has been establisch, the applica
 | CMSIS_5 | v5.9.0 |
 | CMSIS-FreeRTOS | v11.0.1 |
 
-#### <u>others:</u>
+#### <u>others</u>
   - Microchip Trust Platform Design Suite (TPDS)
   - Serial Terminal application like TERA TERM
 
@@ -164,9 +165,17 @@ This application repository should be cloned/downloaded to perform the following
 <img src="images/wolfSslLibrary_Configuration.png" width=320 style="display: block; margin: auto; float: center">
 - Configure the on-board LEDs.<br>
 <img src="images/Led_Configuration.png" width=700 style="display: block; margin: auto; float: center"><br>
-- <b>Note:</b> Anytime changing the settings by means of the MCC <i>Project Graph</i> press button <i>Generate</i>, located within the <i>Project Resources</i> window, to apply that changes into the code. Take special care when merging with existing code.
-- Clean and build the project. To run the project, select "Make and program device" button.
+- Clean and build the project. To run the project, select "Make and program device" button.<br><br>
+<b>Note:</b> Anytime changing the settings by means of the MCC <i>Project Graph</i> press button <i>Generate</i>, located within the <i>Project Resources</i> window, to apply that changes into the code. Take special care when merging with existing code.
   
+[TOP](#contents)
+
+## Run the Demo
+
+The application prints the following information to the connected terminal.<br>
+<img src="images/TerminalOut_KeyStream.png" style="width: 500; display: left; margin: auto;">
+<img src="images/TerminalOut_MQTT.png" style="width: 500; height:415; display: right; margin: auto"><br>
+
 [TOP](#contents)
 
 ## Links
