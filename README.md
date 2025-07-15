@@ -166,7 +166,7 @@ This application repository should be cloned/downloaded to perform the following
 - Configure the on-board LEDs.<br>
 <img src="images/Led_Configuration.png" width=700 style="display: block; margin: auto; float: center"><br>
 - Clean and build the project. To run the project, select "Make and program device" button.<br><br>
-<b>Note:</b> Anytime changing the settings by means of the MCC <i>Project Graph</i> press button <i>Generate</i>, located within the <i>Project Resources</i> window, to apply that changes into the code. Take special care when merging with existing code.
+<b>Note:</b> Anytime changing the settings by means of the MCC <i>Project Graph</i> press button <i>Generate</i>, located within the <i>Project Resources</i> window, to apply that changes into the code. Take special care when merging with existing code.<br>
   
 [TOP](#contents)
 
@@ -174,6 +174,7 @@ This application repository should be cloned/downloaded to perform the following
 
 The application prints the following information to the connected terminal.<br>
 <img src="images/TerminalOut_KeyStream.png" style="width: 500; display: left; margin: auto;">
+<img src="images/TerminalOut_KeyStream_Refurbed.png" style="width: 500; display: left; margin: auto;">
 <img src="images/TerminalOut_MQTT.png" style="width: 500; height:415; display: right; margin: auto"><br>
 
 [TOP](#contents)
