@@ -48,6 +48,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+
+#include "app_mqtt.h"
 #include "system/mqtt/sys_mqtt.h"
 #include "cloud_wifi_ecc_process.h"
 #include "cloud_wifi_config.h"

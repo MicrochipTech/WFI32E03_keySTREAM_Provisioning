@@ -48,6 +48,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+#include <stdint.h>
+#include <stddef.h>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -56,7 +58,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 void APP_MQTT_Initialize(void);
 void APP_MQTT_Tasks(void);
-
+int32_t APP_MQTT_GetStatus(void *);
+int32_t APP_MQTT_PublishMsg(char *message);
+int32_t APP_MQTT_Subscribe(void);
+int APP_MQTT_GetClientPubTopic(char* buf, size_t buflen);
+int APP_MQTT_GetClientSubTopic(char* buf, size_t buflen);
+int APP_MQTT_GetClientId(char* buf, size_t buflen);
 
 /*******************************************************************************
  End of File

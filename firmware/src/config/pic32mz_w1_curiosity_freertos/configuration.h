@@ -88,8 +88,7 @@ extern "C" {
 #define SYS_NET_INDEX0_PORT        				1
 #define SYS_NET_INDEX0_RECONNECT       			1
 #define SYS_NET_INDEX0_ENABLE_TLS        		1
-#define SYS_NET_INDEX0_IPPROT       			SYS_NET_IP_PROT_TCP    
-//#define SYS_NET_INDEX0_IPPROT       			SYS_NET_IP_PROT_UDP
+#define SYS_NET_INDEX0_IPPROT       			SYS_NET_IP_PROT_TCP
 #define SYS_NET_INDEX0_HOST_NAME        		"192.168.1.1"
 
 /* for ATECC public key callbacks */
@@ -106,7 +105,7 @@ extern "C" {
 #define SYS_NET_INDEX1_PORT        				1
 #define SYS_NET_INDEX1_RECONNECT       			1
 #define SYS_NET_INDEX1_ENABLE_TLS        		0
-#define SYS_NET_INDEX1_IPPROT       			SYS_NET_IP_PROT_TCP
+#define SYS_NET_INDEX1_IPPROT       			SYS_NET_IP_PROT_UDP
 #define SYS_NET_INDEX1_HOST_NAME        		"192.168.1.1"
 
 #define SYS_NET_TLS_ENABLED
@@ -222,7 +221,7 @@ extern "C" {
 
 /* Net Pres RTOS Configurations*/
 #define DRV_BA414E_RTOS_STACK_SIZE           1024
-#define DRV_BA414E_RTOS_TASK_PRIORITY             1	
+#define DRV_BA414E_RTOS_TASK_PRIORITY             1
 
 
 
@@ -342,7 +341,7 @@ extern "C" {
                                                     TCPIP_NETWORK_CONFIG_DHCP_CLIENT_ON |\
                                                     TCPIP_NETWORK_CONFIG_DNS_CLIENT_ON |\
                                                     TCPIP_NETWORK_CONFIG_IP_STATIC
-                                                    
+
 #define TCPIP_NETWORK_DEFAULT_MAC_DRIVER_IDX0         WDRV_PIC32MZW1_MACObject
 
 
@@ -358,7 +357,7 @@ extern "C" {
 
 #define TCPIP_IPV4_COMMANDS false
 
-#define TCPIP_IPV4_FORWARDING_ENABLE    false 
+#define TCPIP_IPV4_FORWARDING_ENABLE    false
 
 
 
@@ -515,7 +514,7 @@ extern "C" {
 /* Net Pres RTOS Configurations*/
 #define NET_PRES_RTOS_STACK_SIZE                8192
 #define NET_PRES_RTOS_TASK_PRIORITY             1
-	
+
 #define FREERTOS
 
 

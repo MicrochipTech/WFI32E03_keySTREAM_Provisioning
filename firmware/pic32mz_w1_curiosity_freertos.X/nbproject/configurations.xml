@@ -651,8 +651,6 @@
       <itemPath>../src/app.h</itemPath>
       <itemPath>../src/app_mqtt.h</itemPath>
       <itemPath>../src/cloud_wifi_ecc_process.h</itemPath>
-      <itemPath>../src/cloud_wifi_task.h</itemPath>
-      <itemPath>../src/kta_handler.h</itemPath>
       <itemPath>../src/cloud_wifi_config.h</itemPath>
       <itemPath>../src/cloud_status.h</itemPath>
       <itemPath>../src/app_cert.h</itemPath>
@@ -1214,7 +1212,6 @@
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app_mqtt.c</itemPath>
       <itemPath>../src/cloud_wifi_ecc_process.c</itemPath>
-      <itemPath>../src/kta_handler.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -1409,10 +1406,6 @@
           <property key="stack-smashing" value=""/>
           <property key="wpo-lto" value="false"/>
         </C32Global>
-      </item>
-      <item path="../src/kta_handler.c" ex="true" overriding="false">
-      </item>
-      <item path="../src/kta_handler.h" ex="true" overriding="false">
       </item>
       <C32>
         <property key="additional-warnings" value="false"/>

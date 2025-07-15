@@ -49,12 +49,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 #include "system/net/sys_net.h"
-
 #include "ktaFieldMgntHook.h"
 #include "cloud_status.h"
-
 #include "atca_iface.h"
 #include "atca_basic.h"
+#include "app_mqtt.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -238,7 +238,6 @@ void APP_Initialize ( void )
   Remarks:
     See prototype in app.h.
  */
-
 void APP_Tasks ( void )
 {
     TKStatus ktastatus = E_K_STATUS_ERROR;
@@ -251,7 +250,7 @@ void APP_Tasks ( void )
         case APP_STATE_INIT_ECC608:
         {
             SYS_CONSOLE_MESSAGE(TERM_YELLOW"#########################################\r\n"TERM_RESET);
-            SYS_CONSOLE_MESSAGE(TERM_CYAN"    WFI32E03 Keystream Connect Demo\r\n"TERM_RESET);
+            SYS_CONSOLE_MESSAGE(TERM_CYAN"  WFI32E03 KeySTREAM Cloud Connect Demo\r\n"TERM_RESET);
             SYS_CONSOLE_MESSAGE(TERM_YELLOW"#########################################\r\n"TERM_RESET);
 
             // Initialize the ECC608 TrustManager IC
@@ -275,7 +274,7 @@ void APP_Tasks ( void )
 
             if( val == SYS_WIFI_STATUS_TCPIP_READY)
             {
-                SYS_CONSOLE_MESSAGE(TERM_GREEN"WIFI UP\r\n"TERM_RESET);
+                SYS_CONSOLE_MESSAGE(TERM_GREEN"WIFI UP\r\n\n"TERM_RESET);
                 g_appData.state = APP_STATE_INIT_CRYPTOAUTHLIB;
                 kta_gCloudWifiState = CLOUD_STATE_WIFI_CONNECTED;
             }
@@ -285,12 +284,12 @@ void APP_Tasks ( void )
         }
         case APP_STATE_INIT_CRYPTOAUTHLIB:
         {
-            SYS_CONSOLE_PRINT(TERM_YELLOW"[APP] : Initialize Keystream\r\n"TERM_RESET);
+            SYS_CONSOLE_MESSAGE(TERM_YELLOW"Initialize KeySTREAM\r\n"TERM_RESET);
 
             ktastatus = ktaKeyStreamInit();
             if (ktastatus != E_K_STATUS_OK)
             {
-                SYS_CONSOLE_PRINT("ktaKeyStreamInit failed\r\n");
+                SYS_CONSOLE_MESSAGE(TERM_RED"ktaKeyStreamInit failed\r\n"TERM_RESET);
                 g_appData.state = APP_STATE_ERROR;
                 kta_gCloudWifiState = CLOUD_STATE_UNKNOWN;
                 break;
@@ -303,13 +302,13 @@ void APP_Tasks ( void )
         case APP_STATE_CONNECT_TO_KEYSTREAM:
         {
             int delay_counter = 0u;
-            SYS_CONSOLE_PRINT(TERM_YELLOW"[APP] : Connect to Keystream\r\n"TERM_RESET);
+            SYS_CONSOLE_MESSAGE(TERM_YELLOW"Connect to KeySTREAM\r\n"TERM_RESET);
             
             /* Calling KTA keySTREAM field management. */
             ktastatus = ktaKeyStreamFieldMgmt(true , &ktaKSCmdStatus);
             if (ktastatus != E_K_STATUS_OK)
             {
-                SYS_CONSOLE_PRINT("ktaKeyStreamFieldMgmt failed\r\n");
+                SYS_CONSOLE_MESSAGE(TERM_RED"ktaKeyStreamFieldMgmt failed\r\n"TERM_RESET);
 
                 //Over all delay of 30 seconds in case of error.
                 while (delay_counter < KEYSTREAM_NO_OPS_DELAY_COUNTER)
@@ -322,24 +321,26 @@ void APP_Tasks ( void )
 
             if (ktaKSCmdStatus == E_K_KTA_KS_STATUS_NO_OPERATION)
             {
-                SYS_CONSOLE_MESSAGE("Device Onboarding in keySTREAM Done. Device is in ACTIVATED State.\r\n");
+                SYS_CONSOLE_MESSAGE(TERM_YELLOW"Device onboarding in keySTREAM done. Device is in ACTIVATED state.\r\n"TERM_RESET);
             }
 
             /* Checking KTA status for Renewed or Refurbished. */
             if (ktaKSCmdStatus == E_K_KTA_KS_STATUS_RENEW || ktaKSCmdStatus == E_K_KTA_KS_STATUS_REFURBISH)
             {
-                SYS_CONSOLE_MESSAGE("+++++ Reset the state to CLOUD_STATE_WIFI_DISCONNECT +++++\r\n\n");
+                SYS_CONSOLE_MESSAGE(TERM_YELLOW"Device is in RENEWED/REFURBISHED state, re-initiate keySTREAM onboarding.\r\n\n"TERM_RESET);
+                g_appData.state = APP_STATE_OPEN_WIFI_DRIVER;
             }
             else if (kta_gCloudWifiState != CLOUD_STATE_CLOUD_CONNECTED)
             {
                 if (kta_gCloudWifiState != CLOUD_STATE_CLOUD_DISCONNECT)
                 {
+                    SYS_CONSOLE_MESSAGE(TERM_YELLOW"Finished KeySTREAM\r\n\n"TERM_RESET);
                     kta_gCloudWifiState = CLOUD_STATE_CLOUD_CONNECTING;
-                    SYS_CONSOLE_MESSAGE("+++++ CLOUD_STATE_CLOUD_CONNECTING +++++\r\n\n");
+                    SYS_CONSOLE_MESSAGE("Device is now connecting to the cloud provider.\r\n");
+                    g_appData.state = APP_STATE_SERVICE_TASKS;
                 }
             }
-            
-            g_appData.state = APP_STATE_SERVICE_TASKS;
+
             break;
         }
         // Perform service tasks        
@@ -347,7 +348,7 @@ void APP_Tasks ( void )
         {
             if( kta_gCloudWifiState == CLOUD_STATE_CLOUD_CONNECTING )
             {
-                SYS_CONSOLE_PRINT("Resolving cloud hostname %s\r\n", SYS_MQTT_INDEX0_BROKER_NAME);
+                SYS_CONSOLE_PRINT("Resolving cloud hostname %s\r\n\n", SYS_MQTT_INDEX0_BROKER_NAME);
 
                 APP_MQTT_Initialize();
                 kta_gCloudWifiState = CLOUD_STATE_CLOUD_CONNECT;

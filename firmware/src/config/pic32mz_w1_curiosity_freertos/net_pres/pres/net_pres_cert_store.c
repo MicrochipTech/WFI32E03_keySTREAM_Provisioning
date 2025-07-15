@@ -33,10 +33,7 @@ Microchip or any third party.
 */
 
 #include "net_pres/pres/net_pres_certstore.h"
-#define USE_CERT_BUFFERS_2048
-//#include "wolfssl/certs_test.h"
-//#include "../../app_cert.h"
-#include "../../library/kta_lib/cust_def_signer.h"
+#include "../../app_cert.h"
 
 bool NET_PRES_CertStoreGetCACerts(const uint8_t ** certPtr, int32_t * certSize, uint8_t certIndex)
 {
@@ -44,27 +41,3 @@ bool NET_PRES_CertStoreGetCACerts(const uint8_t ** certPtr, int32_t * certSize, 
     *certSize = sizeof_g_amazon_root_ca3_signer;
     return true;
 }
-/*bool NET_PRES_CertStoreGetCACerts(const uint8_t ** certPtr, int32_t * certSize, uint8_t certIndex)
-{
-    *certPtr = g_template_1_signer;
-    *certSize = sizeof_g_template_1_signer;
-    return true;
-}*/
-/*bool NET_PRES_CertStoreGetCACerts(const uint8_t ** certPtr, int32_t * certSize, uint8_t certIndex)
-{
-    *certPtr = app_client_cert_der_2048;
-    *certSize = sizeof_app_client_cert_der_2048;
-    return true;
-}*/
-/*
-bool NET_PRES_CertStoreGetCACerts(const uint8_t ** certPtr, int32_t * certSize, uint8_t certIndex)
-{
-    *certPtr = client_cert_der_2048;
-    *certSize = sizeof_client_cert_der_2048;
-    return true;
-}*/
-/*
-bool NET_PRES_CertStoreGetCACerts(const uint8_t ** certPtr, int32_t * certSize, uint8_t certIndex)
-{
-    return false;
-}*/

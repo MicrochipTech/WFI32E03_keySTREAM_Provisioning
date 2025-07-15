@@ -1083,23 +1083,23 @@
     &lt;/ComponentGraph&gt;
     &lt;ComponentGraph dnOrder=&quot;8&quot; id=&quot;System Configuration&quot;&gt;
       &lt;ElementPositions dnOrder=&quot;0&quot;&gt;
-        &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;FreeRTOS&quot; x=&quot;24&quot; y=&quot;122&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;HarmonyCore&quot; x=&quot;29&quot; y=&quot;423&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;2&quot; id=&quot;TCP/IP STACK&quot; x=&quot;37&quot; y=&quot;204&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;FreeRTOS&quot; x=&quot;18&quot; y=&quot;37&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;HarmonyCore&quot; x=&quot;18&quot; y=&quot;115&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;2&quot; id=&quot;TCP/IP STACK&quot; x=&quot;32&quot; y=&quot;567&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;3&quot; id=&quot;core_timer&quot; x=&quot;180&quot; y=&quot;67&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;4&quot; id=&quot;drvWifiPic32mzw1&quot; x=&quot;209&quot; y=&quot;307&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;5&quot; id=&quot;drv_ba414e&quot; x=&quot;29&quot; y=&quot;282&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;6&quot; id=&quot;lib_crypto&quot; x=&quot;653&quot; y=&quot;111&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;7&quot; id=&quot;lib_wolfcrypt&quot; x=&quot;466&quot; y=&quot;44&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;8&quot; id=&quot;lib_wolfssl&quot; x=&quot;667&quot; y=&quot;15&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;9&quot; id=&quot;nvm&quot; x=&quot;20&quot; y=&quot;20&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;10&quot; id=&quot;sys_command&quot; x=&quot;632&quot; y=&quot;219&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;11&quot; id=&quot;sys_console&quot; x=&quot;437&quot; y=&quot;427&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;12&quot; id=&quot;sys_debug&quot; x=&quot;657&quot; y=&quot;352&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;4&quot; id=&quot;drvWifiPic32mzw1&quot; x=&quot;337&quot; y=&quot;161&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;5&quot; id=&quot;drv_ba414e&quot; x=&quot;23&quot; y=&quot;229&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;6&quot; id=&quot;lib_crypto&quot; x=&quot;340&quot; y=&quot;419&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;7&quot; id=&quot;lib_wolfcrypt&quot; x=&quot;160&quot; y=&quot;285&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;8&quot; id=&quot;lib_wolfssl&quot; x=&quot;341&quot; y=&quot;336&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;9&quot; id=&quot;nvm&quot; x=&quot;182&quot; y=&quot;148&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;10&quot; id=&quot;sys_command&quot; x=&quot;803&quot; y=&quot;12&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;11&quot; id=&quot;sys_console&quot; x=&quot;610&quot; y=&quot;9&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;12&quot; id=&quot;sys_debug&quot; x=&quot;807&quot; y=&quot;135&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;13&quot; id=&quot;sys_time&quot; x=&quot;322&quot; y=&quot;23&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;14&quot; id=&quot;tcpipNetConfig&quot; x=&quot;427&quot; y=&quot;249&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;15&quot; id=&quot;tcpipStack&quot; x=&quot;669&quot; y=&quot;479&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;16&quot; id=&quot;uart1&quot; x=&quot;277&quot; y=&quot;512&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;14&quot; id=&quot;tcpipNetConfig&quot; x=&quot;563&quot; y=&quot;197&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;15&quot; id=&quot;tcpipStack&quot; x=&quot;807&quot; y=&quot;261&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;16&quot; id=&quot;uart1&quot; x=&quot;462&quot; y=&quot;73&quot;/&gt;
       &lt;/ElementPositions&gt;
     &lt;/ComponentGraph&gt;
     &lt;ComponentGraph dnOrder=&quot;9&quot; id=&quot;TCP/IP STACK&quot;&gt;
@@ -1122,20 +1122,20 @@
     &lt;/ComponentGraph&gt;
     &lt;ComponentGraph dnOrder=&quot;11&quot; id=&quot;__ROOTVIEW&quot;&gt;
       &lt;ElementPositions dnOrder=&quot;0&quot;&gt;
-        &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;System Configuration&quot; x=&quot;430&quot; y=&quot;60&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;atecc608&quot; x=&quot;687&quot; y=&quot;321&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;2&quot; id=&quot;core&quot; x=&quot;268&quot; y=&quot;63&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;3&quot; id=&quot;cryptoauthlib&quot; x=&quot;536&quot; y=&quot;192&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;4&quot; id=&quot;dfp&quot; x=&quot;260&quot; y=&quot;117&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;5&quot; id=&quot;i2c1&quot; x=&quot;501&quot; y=&quot;371&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;6&quot; id=&quot;kta_lib&quot; x=&quot;232&quot; y=&quot;310&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;7&quot; id=&quot;lib_pahomqtt&quot; x=&quot;48&quot; y=&quot;367&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;8&quot; id=&quot;stdio&quot; x=&quot;175&quot; y=&quot;191&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;9&quot; id=&quot;sysMqttPic32mzw1&quot; x=&quot;48&quot; y=&quot;294&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;10&quot; id=&quot;sysNetPic32mzw1&quot; x=&quot;117&quot; y=&quot;131&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;11&quot; id=&quot;sysWifiPic32mzw1&quot; x=&quot;480&quot; y=&quot;20&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;12&quot; id=&quot;sysWifiProvPic32mzw1&quot; x=&quot;250&quot; y=&quot;160&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;13&quot; id=&quot;uart3&quot; x=&quot;14&quot; y=&quot;176&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;System Configuration&quot; x=&quot;316&quot; y=&quot;523&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;1&quot; id=&quot;atecc608&quot; x=&quot;557&quot; y=&quot;255&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;2&quot; id=&quot;core&quot; x=&quot;75&quot; y=&quot;74&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;3&quot; id=&quot;cryptoauthlib&quot; x=&quot;281&quot; y=&quot;38&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;4&quot; id=&quot;dfp&quot; x=&quot;72&quot; y=&quot;248&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;5&quot; id=&quot;i2c1&quot; x=&quot;369&quot; y=&quot;305&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;6&quot; id=&quot;kta_lib&quot; x=&quot;280&quot; y=&quot;164&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;7&quot; id=&quot;lib_pahomqtt&quot; x=&quot;74&quot; y=&quot;214&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;8&quot; id=&quot;stdio&quot; x=&quot;248&quot; y=&quot;306&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;9&quot; id=&quot;sysMqttPic32mzw1&quot; x=&quot;74&quot; y=&quot;141&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;10&quot; id=&quot;sysNetPic32mzw1&quot; x=&quot;74&quot; y=&quot;106&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;11&quot; id=&quot;sysWifiPic32mzw1&quot; x=&quot;74&quot; y=&quot;178&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;12&quot; id=&quot;sysWifiProvPic32mzw1&quot; x=&quot;81&quot; y=&quot;543&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;13&quot; id=&quot;uart3&quot; x=&quot;74&quot; y=&quot;292&quot;/&gt;
       &lt;/ElementPositions&gt;
     &lt;/ComponentGraph&gt;
   &lt;/UserData&gt;
@@ -8192,6 +8192,22 @@
 </value>
       </entry>
       <entry>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sysNetPic32mzw1" name="SYS_NET_IDX1_IPPROT"/>
+         <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sysNetPic32mzw1&gt;
+  &lt;sysNetPic32mzw1 dnOrder=&quot;0&quot; id=&quot;SYS_NET_IDX1_IPPROT&quot;&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;UDP&quot;/&gt;
+    &lt;/Values&gt;
+  &lt;/sysNetPic32mzw1&gt;
+&lt;/sysNetPic32mzw1&gt;
+</value>
+      </entry>
+      <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sysNetPic32mzw1" name="SYS_NET_IDX1_PORT"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sysNetPic32mzw1&gt;
   &lt;sysNetPic32mzw1 dnOrder=&quot;0&quot; id=&quot;SYS_NET_IDX1_PORT&quot;&gt;
@@ -8212,7 +8228,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sysNetPic32mzw1&gt;
   &lt;sysNetPic32mzw1 dnOrder=&quot;0&quot; id=&quot;SYS_NET_IPPROT&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;UDP&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;TCP&quot;/&gt;
     &lt;/Values&gt;
   &lt;/sysNetPic32mzw1&gt;
 &lt;/sysNetPic32mzw1&gt;

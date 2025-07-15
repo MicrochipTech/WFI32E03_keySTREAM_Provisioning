@@ -37,7 +37,7 @@
 #include "tng/tng_atcacert_client.h"
 #endif
 
-#include "cloud_wifi_config.h"
+#include "cloud_wifi_ecc_process.h"
 
 #ifdef NO_INLINE
     #include <wolfssl/wolfcrypt/misc.h>
@@ -1019,7 +1019,7 @@ int atcatls_set_callbacks(WOLFSSL_CTX* ctx)
 #ifdef WOLFSSL_ATECC_TNGTLS
     ret = atcatls_set_certificates(ctx);
 #elif defined WOLFSSL_ATECC_TMNGTLS
-    // TODO AJ: create the certificates
+    // create the certificates needed for TLS handshaking
     ret = ecc_set_certificates(ctx);
 #endif
 

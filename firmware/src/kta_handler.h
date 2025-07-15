@@ -19,7 +19,6 @@
 /* -------------------------------------------------------------------------- */
 /* IMPORTS                                                                    */
 /* -------------------------------------------------------------------------- */
-//#include "wdrv_winc_client_api.h"
 #include "wdrv_pic32mzw_client_api.h"
 #include "cloud_wifi_ecc_process.h"
 #include "cloud_wifi_task.h"

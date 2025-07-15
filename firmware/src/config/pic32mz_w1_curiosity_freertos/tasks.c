@@ -132,7 +132,6 @@ void _SYS_WIFI_Task(  void *pvParameters  )
     {
         SYS_WIFI_Tasks(sysObj.syswifi);
         vTaskDelay(4 / portTICK_PERIOD_MS);
-        //vTaskDelay(3 / portTICK_PERIOD_MS);
     }
 }
 

@@ -240,7 +240,7 @@ int8_t ecc_set_certificates(WOLFSSL_CTX *ctx)
         }
         pem_cert_size = sizeof(pem_cert);
         atcacert_encode_pem_cert(signer_cert, signer_cert_size, pem_cert, &pem_cert_size);
-        APP_DebugPrintf("Signer Cert : \r\n%s\r\n", pem_cert);
+        APP_DebugPrintf("Signer Cert: \r\n%s\r\n", pem_cert);
 
         // Get the signer's public key from its certificate
         if(ATCACERT_E_SUCCESS != (atca_status = atcacert_get_subj_public_key(&g_cert_def_1_signer, signer_cert,
@@ -259,7 +259,7 @@ int8_t ecc_set_certificates(WOLFSSL_CTX *ctx)
             break;
         }
         atcacert_encode_pem_cert(device_cert, device_cert_size, pem_cert, &pem_cert_size);
-        APP_DebugPrintf("Device Cert : \r\n%s\r\n", pem_cert);
+        APP_DebugPrintf("Device Cert: \r\n%s\r\n", pem_cert);
 
         if(ATCACERT_E_SUCCESS != (atca_status = atcacert_get_subj_key_id(&g_cert_def_3_device, device_cert,
                                         device_cert_size, subject_key_id)))
@@ -327,7 +327,7 @@ int8_t ecc_set_certificates(WOLFSSL_CTX *ctx)
         }
 
         // Update the TLS cert chain
-        SYS_CONSOLE_MESSAGE(TERM_YELLOW"Store certs to buffer -> "TERM_RESET);
+        SYS_CONSOLE_MESSAGE(TERM_YELLOW"Storing certificates to buffer ... "TERM_RESET);
         device_cert = (uint8_t*)(sector_buffer) + ((tstrTlsSrvSecHdr*)sector_buffer)->astrEntries[0].u32FileAddr;
         status = wolfSSL_CTX_use_certificate_chain_buffer_format(ctx, (const unsigned char*)device_cert,
                  (uint32_t)(signer_cert_size + device_cert_size), WOLFSSL_FILETYPE_ASN1);
