@@ -83,7 +83,7 @@ In case a successful connection to the MQTT broker has been establisch, the appl
 ## Hardware Setup
 #### <u>PIC32 WFI32 2.0 Curiosity Board</u>
 
-  - Connect the ATECC608 TRUST and PIC32 WFI32 2.0 Curiosity board via mikroBUS&trade; header (J200)<br>
+  - Connect the ATECC608 TRUST and PIC32 WFI32 2.0 Curiosity board via mikroBUS&trade; header (J200)<br><br>
   <img src="images/Pic32Wfi32.png" width=160 style="display: block; margin: auto; float: center"><br>
   - For normal operations set the Power Source Selection Jumper (J202) to V<sub>BUS</sub>-VIN (5-6), if the demo software has been already programmed to the device
   - Connect the Target VBUS Micro-B Connector (J204) on the board to the computer using a micro USB cable
