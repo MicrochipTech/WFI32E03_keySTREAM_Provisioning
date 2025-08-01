@@ -78,14 +78,17 @@ SYS_MQTT_Config g_sTmpSysMqttCfg;
 #define SYS_MQTT_DEF_PUB_RETAIN     0
 #define SYS_MQTT_DEF_PUB_QOS        1
 
-//#define APP_CFG_WITH_MQTT_API
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local data
 // *****************************************************************************
 // *****************************************************************************
+static char config_thing_id[130];
 
+// *****************************************************************************
+// Section: Application Initialization and State Machine Functions
+// *****************************************************************************
+// *****************************************************************************
 int32_t APP_MQTT_PublishMsg(char *message)
 {
 	SYS_MQTT_PublishTopicCfg sMqttTopicCfg;
@@ -107,11 +110,11 @@ int32_t APP_MQTT_Subscribe(void)
 {
     SYS_MQTT_SubscribeConfig sMqttSubCfg;
 	int32_t retVal = SYS_MQTT_FAILURE;
-    
+
     APP_MQTT_GetClientSubTopic(sMqttSubCfg.topicName, 100);
 	sMqttSubCfg.entryValid = 0;
 	sMqttSubCfg.qos = SYS_MQTT_DEF_PUB_QOS;
-    
+
 	SYS_CONSOLE_PRINT("\nSubscribeTopic: %s\r\n", sMqttSubCfg.topicName);
 
     retVal = SYS_MQTT_Subscribe(g_sSysMqttHandle, &sMqttSubCfg);
@@ -119,24 +122,19 @@ int32_t APP_MQTT_Subscribe(void)
     {
 		SYS_CONSOLE_PRINT("\nSubscribe to Topic failed (%d)\r\n", retVal);
     }
- 	return retVal;   
+ 	return retVal;
 }
-
-// *****************************************************************************
-// Section: Application Initialization and State Machine Functions
-// *****************************************************************************
-// *****************************************************************************
 
 /******************************************************************************
   Function:
     int32_t MqttCallback(SYS_MQTT_EVENT_TYPE eEventType, void *data, uint16_t len, void* cookie)
 
   Remarks:
-    Callback function registered with the SYS_MQTT_Connect() API. For more details 
+    Callback function registered with the SYS_MQTT_Connect() API. For more details
 	check https://microchip-mplab-harmony.github.io/wireless/system/mqtt/docs/interface.html
  */
 int32_t MqttCallback(SYS_MQTT_EVENT_TYPE eEventType, void *data, uint16_t len, void* cookie)
-{       
+{
     switch (eEventType)
     {
         case SYS_MQTT_EVENT_MSG_RCVD:
@@ -149,16 +147,16 @@ int32_t MqttCallback(SYS_MQTT_EVENT_TYPE eEventType, void *data, uint16_t len, v
             SYS_CONSOLE_PRINT("\nMqttCallback():\r\nMsg received on Topic: %s\r\nMsg: %s\r\n", psMsg->topicName, psMsg->message);
 
             char *pPtr;
-            pPtr = strstr(psMsg->message, "redLED");
-            if (pPtr != NULL)
-            {
-                RED_LED_Toggle();
-            }
-
             pPtr = strstr(psMsg->message, "greenLED");
             if (pPtr != NULL)
             {
                 GREEN_LED_Toggle();
+            }
+
+            pPtr = strstr(psMsg->message, "redLED");
+            if (pPtr != NULL)
+            {
+                RED_LED_Toggle();
             }
             break;
         }
@@ -168,7 +166,7 @@ int32_t MqttCallback(SYS_MQTT_EVENT_TYPE eEventType, void *data, uint16_t len, v
         }
         case SYS_MQTT_EVENT_MSG_CONNECTED:
         {
-			SYS_CONSOLE_PRINT("\nMqttCallback(): Connected\r\n");
+			SYS_CONSOLE_MESSAGE("\nMqttCallback(): Connected\r\n");
             g_appData.state = APP_STATE_CLOUD_CONNECTED;
             break;
         }
@@ -187,7 +185,7 @@ int32_t MqttCallback(SYS_MQTT_EVENT_TYPE eEventType, void *data, uint16_t len, v
         case SYS_MQTT_EVENT_MSG_PUBLISHED:
         {
 			/* MQTT Client Msg Published */
-            SYS_CONSOLE_PRINT("\nMqttCallback(): Published\r\n");
+            SYS_CONSOLE_MESSAGE("\nMqttCallback(): Published\r\n");
             break;
         }
         case SYS_MQTT_EVENT_MSG_CONNACK_TO:
@@ -244,18 +242,21 @@ void APP_MQTT_Initialize(void) {
     psMqttCfg = &g_sTmpSysMqttCfg;
     psMqttCfg->sBrokerConfig.autoConnect = true;
     psMqttCfg->sBrokerConfig.tlsEnabled = true;
-    strcpy(psMqttCfg->sBrokerConfig.brokerName, SYS_MQTT_INDEX0_BROKER_NAME);
-    psMqttCfg->sBrokerConfig.serverPort = SYS_MQTT_INDEX0_MQTT_PORT;
+    strcpy(psMqttCfg->sBrokerConfig.brokerName, CLOUD_ENDPOINT);
+    psMqttCfg->sBrokerConfig.serverPort = CLOUD_PORT;
     psMqttCfg->sBrokerConfig.cleanSession = true;
     psMqttCfg->sBrokerConfig.keepAliveInterval = 60;
     psMqttCfg->subscribeCount = 0;
     APP_MQTT_GetClientId(psMqttCfg->sBrokerConfig.clientId, sizeof(subject_key_id)*2+1);
+
+    SYS_CONSOLE_PRINT("... cloud endpoint: %s/%d\r\n\n", CLOUD_ENDPOINT, CLOUD_PORT);
+
     g_sSysMqttHandle = SYS_MQTT_Connect(&g_sTmpSysMqttCfg, MqttCallback, NULL);
-#else    
+#else
     g_sSysMqttHandle = SYS_MQTT_Connect(NULL, /* NULL value means that the MHC configuration should be used for this connection */
-										MqttCallback, 
+										MqttCallback,
 										NULL);
-#endif    
+#endif
 }
 
 /******************************************************************************
@@ -281,10 +282,6 @@ int32_t APP_MQTT_GetStatus(void *p) {
 
     return SYS_MQTT_GetStatus(g_sSysMqttHandle);
 }
-
-
-
-static char config_thing_id[130];
 
 int APP_MQTT_SetThingId()
 {
@@ -466,6 +463,54 @@ int APP_MQTT_GetClientPubTopic(char* buf, size_t buflen)
         }
     }
     return -1;
+}
+
+void APP_MQTT_CheckLedStates(void)
+{
+    char message[128] = {0};
+    bool publishMsg = false;
+    static bool prevGreenLedState = false;
+    static bool prevRedLedState = false;
+    bool currGreenLedState = (GREEN_LED_Get()==1) ? true : false;
+    bool currRedLedState   = (RED_LED_Get()==1) ? true : false;
+
+    if (SYS_MQTT_STATUS_MQTT_CONNECTED != APP_MQTT_GetStatus(NULL)) {
+        return;
+    }
+
+    if( currGreenLedState != prevGreenLedState )
+    {
+        sprintf(message, "\"greenLED\": \"%s\"", ((currGreenLedState==true) ? "on" : "off"));
+        prevGreenLedState = currGreenLedState;
+        publishMsg = true;
+    }
+
+    if( currRedLedState != prevRedLedState )
+    {
+        char tmp_message[128] = {0};
+
+        if( publishMsg == true )
+            strcat(message, ",");
+
+        sprintf(tmp_message, "\"redLED\": \"%s\"", ((currRedLedState==true) ? "on" : "off"));
+        strcat(message, tmp_message);
+
+        prevRedLedState = currRedLedState;
+        publishMsg = true;
+    }
+
+    if( publishMsg == true )
+    {
+        char mqttMsg[128] = {0};
+        strcpy(mqttMsg, "{\"state\":{\"reported\":{");
+        strcat(mqttMsg, message);
+        strcat(mqttMsg, "}}}");
+
+        if (APP_MQTT_PublishMsg(mqttMsg) == SYS_MQTT_SUCCESS)
+        {
+            SYS_CONSOLE_PRINT("\nPublished Msg(%s) to Topic\r\n", mqttMsg);
+        }
+    }
 }
 
 /*******************************************************************************

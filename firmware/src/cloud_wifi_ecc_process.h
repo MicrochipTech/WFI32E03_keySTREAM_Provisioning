@@ -36,14 +36,9 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "ecc_types.h"
-#include "cloud_wifi_config.h"
-
+#include "app.h"
 
 #ifndef CLOUD_CONFIG_GCP
-
-//int8_t ecc_transfer_certificates();
-//void ecc_process_request(tstrEccReqInfo *ecc_request);
-int8_t transfer_ecc_certs_to_winc(void);
 
 #include <wolfssl/internal.h>
 int8_t ecc_set_certificates(WOLFSSL_CTX *ctx);

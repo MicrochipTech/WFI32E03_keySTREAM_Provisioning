@@ -46,9 +46,10 @@
 #include "configuration.h"
 #include "definitions.h"
 #include "device.h"
-
+#include "app.h"
 #include "library/cryptoauthlib/atca_iface.h"
 #include "library/cryptoauthlib/atca_basic.h"
+
 // ****************************************************************************
 // ****************************************************************************
 // Section: Configuration Bits
@@ -616,10 +617,6 @@ static const SYS_DEBUG_INIT debugInit =
     .consoleIndex = 0,
 };
 
-
-
-
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local initialization functions
@@ -732,9 +729,10 @@ void SYS_Initialize ( void* data )
     sysObj.sysDebug = SYS_DEBUG_Initialize(SYS_DEBUG_INDEX_0, (SYS_MODULE_INIT*)&debugInit);
 
     /* MISRAC 2012 deviation block end */
-    /* WiFi Service Initialization */
-    sysObj.syswifi = SYS_WIFI_Initialize(NULL,NULL,NULL);
-    SYS_ASSERT(sysObj.syswifi  != SYS_MODULE_OBJ_INVALID, "SYS_WIFI_Initialize Failed" );
+    /* TODO M43651: moved WiFi Service Initialization to app.c
+     *              due to passing file based user WiFi configuration */
+    //sysObj.syswifi = SYS_WIFI_Initialize(NULL,NULL,NULL);
+    //SYS_ASSERT(sysObj.syswifi  != SYS_MODULE_OBJ_INVALID, "SYS_WIFI_Initialize Failed" );
 
     sysObj.ba414e = DRV_BA414E_Initialize(0, (SYS_MODULE_INIT*)&ba414eInitData);
 

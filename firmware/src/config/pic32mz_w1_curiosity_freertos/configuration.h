@@ -164,7 +164,7 @@ extern "C" {
 #define SYS_CONSOLE_DEVICE_MAX_INSTANCES   			(1U)
 #define SYS_CONSOLE_UART_MAX_INSTANCES 	   			(1U)
 #define SYS_CONSOLE_USB_CDC_MAX_INSTANCES 	   		(0U)
-#define SYS_CONSOLE_PRINT_BUFFER_SIZE        		(256U)
+#define SYS_CONSOLE_PRINT_BUFFER_SIZE        		(384U)
 
 
 
@@ -520,8 +520,6 @@ extern "C" {
 
 /* WIFI System Service Configuration Options */
 #define SYS_WIFI_DEVMODE        			SYS_WIFI_STA
-
-
 #define SYS_WIFI_MAX_CBS					1
 #define SYS_WIFI_COUNTRYCODE        	    "GEN"
 #define SYS_WIFI_STA_SSID        			""

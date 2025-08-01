@@ -81,8 +81,6 @@
 #include "system/console/src/sys_console_uart_definitions.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "app.h"
-
 
 
 // DOM-IGNORE-BEGIN

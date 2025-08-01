@@ -654,6 +654,7 @@
       <itemPath>../src/cloud_wifi_config.h</itemPath>
       <itemPath>../src/cloud_status.h</itemPath>
       <itemPath>../src/app_cert.h</itemPath>
+      <itemPath>../src/tmg_conf.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

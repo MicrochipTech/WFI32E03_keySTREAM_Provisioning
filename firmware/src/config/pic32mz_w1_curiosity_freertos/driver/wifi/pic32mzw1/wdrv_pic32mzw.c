@@ -3078,7 +3078,6 @@ void WDRV_PIC32MZW_WIDProcess(uint16_t wid, uint16_t length, const uint8_t *cons
             
             if ((0 == *pData) && (WDRV_PIC32MZW_CONN_STATE_DISCONNECTED != pCtrl->connectedState))
             {
-                SYS_CONSOLE_PRINT("con failed %d, %d", pData, pCtrl->connectedState);
                 WDRV_PIC32MZW_CONN_STATE ConnState = WDRV_PIC32MZW_CONN_STATE_FAILED;
                 pCtrl->opChannel = WDRV_PIC32MZW_CID_ANY;
 

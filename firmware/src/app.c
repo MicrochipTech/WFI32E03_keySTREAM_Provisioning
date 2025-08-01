@@ -48,11 +48,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+#include "app.h"
 #include "system/net/sys_net.h"
+#include "system/wifi/sys_wifi.h"
 #include "ktaFieldMgntHook.h"
 #include "cloud_status.h"
-#include "atca_iface.h"
-#include "atca_basic.h"
 #include "app_mqtt.h"
 
 // *****************************************************************************
@@ -66,6 +66,18 @@ extern SYS_MODULE_OBJ g_sSysMqttHandle;
 
 APP_DATA g_appData;
 
+static SYS_WIFI_CONFIG appWifiConfig = 
+{
+    .mode               = SYS_WIFI_DEVMODE,
+    .saveConfig         = SYS_WIFIPROV_SAVECONFIG,
+    .countryCode        = SYS_WIFI_COUNTRYCODE,
+    .staConfig.channel  = 0,
+    .staConfig.autoConnect = SYS_WIFI_STA_AUTOCONNECT,
+    .staConfig.authType = SYS_WIFI_STA_AUTHTYPE,
+    .staConfig.ssid     = WLAN_SSID,
+    .staConfig.psk      = WLAN_PSK,
+};
+
 #define KEYSTREAM_NO_OPS_INTERVAL       (1000)
 #define KEYSTREAM_NO_OPS_DELAY_COUNTER  (30)
 TKktaKeyStreamStatus ktaKSCmdStatus = E_K_KTA_KS_STATUS_NONE;
@@ -77,10 +89,6 @@ static int printBuffPtr;
 static OSAL_MUTEX_HANDLE_TYPE consoleMutex;
 #define RECV_BUFFER_LEN		1400  
 uint8_t recv_buffer[RECV_BUFFER_LEN + 1];
-
-static uint32_t g_lastPubTimeout = 0;
-#define MQTT_PERIOIDC_PUB_TIMEOUT   5 //Sec ; if the value is 0, Periodic Publish will disable
-#define MQTT_PUB_TIMEOUT_CONST (MQTT_PERIOIDC_PUB_TIMEOUT * SYS_TMR_TickCounterFrequencyGet())
 
 static void APP_DebugPrint(uint8_t *pBuf, size_t len)
 {
@@ -153,63 +161,6 @@ void APP_DebugPrintBuffer(const uint8_t *pBuf, uint16_t bufLen)
     APP_DebugPrint(tmpBuf, len);
 }
 
-void APP_CheckTimeOut(uint32_t timeOutValue, uint32_t lastTimeOut)
-{
-    char message[128] = {0};
-    bool publishMsg = false;
-    static bool prevGreenLedState = false;
-    static bool prevRedLedState = false;
-    bool currGreenLedState = (GREEN_LED_Get()==1) ? true : false;
-    bool currRedLedState   = (RED_LED_Get()==1) ? true : false;
-    
-    if (timeOutValue == 0) {
-        return;
-    }
-
-    if (SYS_MQTT_STATUS_MQTT_CONNECTED != APP_MQTT_GetStatus(NULL)) {
-        return;
-    }
-
-    if (lastTimeOut == 0) {
-        g_lastPubTimeout = SYS_TMR_TickCountGet();
-        return;
-    }
-
-    if (SYS_TMR_TickCountGet() - lastTimeOut > timeOutValue)
-    {
-        static bool led = true;
-        
-        if( led == 1 )
-            sprintf(message, "{\"state\":{\"desired\":{\"greenLED\":\"%s\"}}}", ((currGreenLedState==true) ? "off" : "on"));
-        else
-            sprintf(message, "{\"state\":{\"desired\":{\"redLED\":\"%s\"}}}", ((currRedLedState==true) ? "off" : "on"));
-        
-        led = !led;
-        g_lastPubTimeout = SYS_TMR_TickCountGet();
-        publishMsg = true;
-    }
-    else if( currGreenLedState != prevGreenLedState )
-    {
-        sprintf(message, "{\"state\":{\"reported\":{\"greenLED\": \"%s\"}}}", ((currGreenLedState==true) ? "on" : "off"));
-        prevGreenLedState = currGreenLedState;
-        publishMsg = true;
-    }
-    else if( currRedLedState != prevRedLedState )
-    {
-        sprintf(message, "{\"state\":{\"reported\":{\"redLED\": \"%s\"}}}", ((currRedLedState==true) ? "on" : "off"));
-        prevRedLedState = currRedLedState;
-        publishMsg = true;
-    }
-    
-    if( publishMsg == true )
-    {
-        if (APP_MQTT_PublishMsg(message) == SYS_MQTT_SUCCESS) 
-        {
-            SYS_CONSOLE_PRINT("\nPublished Msg(%s) to Topic\r\n", message);
-        }
-    }
-}
-
 /*******************************************************************************
   Function:
     void APP_Initialize ( void )
@@ -219,6 +170,9 @@ void APP_CheckTimeOut(uint32_t timeOutValue, uint32_t lastTimeOut)
  */
 void APP_Initialize ( void )
 {
+    sysObj.syswifi = SYS_WIFI_Initialize(&appWifiConfig, NULL, NULL);
+    SYS_ASSERT(sysObj.syswifi != SYS_MODULE_OBJ_INVALID, "SYS_WIFI_Initialize Failed" );
+
     g_netServHandle = SYS_NET_Open(NULL, NULL, 0); 
     if(g_netServHandle != SYS_MODULE_OBJ_INVALID)
         SYS_CONSOLE_PRINT("NET Service Initialized Successfully\r\n");
@@ -241,8 +195,6 @@ void APP_Initialize ( void )
 void APP_Tasks ( void )
 {
     TKStatus ktastatus = E_K_STATUS_ERROR;
-    
-    SYS_CMD_READY_TO_READ();
 
     /* Check the application's current state. */
     switch ( g_appData.state )
@@ -336,7 +288,7 @@ void APP_Tasks ( void )
                 {
                     SYS_CONSOLE_MESSAGE(TERM_YELLOW"Finished KeySTREAM\r\n\n"TERM_RESET);
                     kta_gCloudWifiState = CLOUD_STATE_CLOUD_CONNECTING;
-                    SYS_CONSOLE_MESSAGE("Device is now connecting to the cloud provider.\r\n");
+                    SYS_CONSOLE_MESSAGE("Device is now connecting to the cloud-computing provider...\r\n");
                     g_appData.state = APP_STATE_SERVICE_TASKS;
                 }
             }
@@ -348,16 +300,13 @@ void APP_Tasks ( void )
         {
             if( kta_gCloudWifiState == CLOUD_STATE_CLOUD_CONNECTING )
             {
-                SYS_CONSOLE_PRINT("Resolving cloud hostname %s\r\n\n", SYS_MQTT_INDEX0_BROKER_NAME);
-
                 APP_MQTT_Initialize();
                 kta_gCloudWifiState = CLOUD_STATE_CLOUD_CONNECT;
             }
             else
             {
-                SYS_CONSOLE_MESSAGE(TERM_GREEN"=\r"TERM_RESET);
-                APP_CheckTimeOut(MQTT_PUB_TIMEOUT_CONST, g_lastPubTimeout);
-                
+                SYS_CONSOLE_MESSAGE(TERM_GREEN">\r"TERM_RESET);
+                APP_MQTT_CheckLedStates();
                 APP_MQTT_Tasks();
             }
             break;
@@ -383,7 +332,6 @@ void APP_Tasks ( void )
             break;
     }
 }
-
 
 /*******************************************************************************
  End of File

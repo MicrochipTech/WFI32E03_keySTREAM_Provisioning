@@ -257,7 +257,7 @@ static inline void SYS_WIFI_PrintWifiConfig(void)
     SYS_CONSOLE_PRINT("\r\n Mode: %d (0-STA, 1-AP)\r\n SaveConfig: %d \r\n ", g_wifiSrvcConfig.mode, g_wifiSrvcConfig.saveConfig);
     if (g_wifiSrvcConfig.mode == SYS_WIFI_STA) 
     {
-        SYS_CONSOLE_PRINT("\r\n STA Configuration:\r\n  Channel: %d \r\n  AutoConnect: %d \r\n  SSID: %s \r\n  Passphrase: %s \r\n  Authentication Type: %d (1-Open, 2-WEP, 3-Mixed mode(WPA/WPA2), 4-WPA2,5-Mixed mode(WPA2/WPA3), 6-WPA3)\r\n\r\n", g_wifiSrvcConfig.staConfig.channel, g_wifiSrvcConfig.staConfig.autoConnect, g_wifiSrvcConfig.staConfig.ssid, g_wifiSrvcConfig.staConfig.psk, g_wifiSrvcConfig.staConfig.authType);
+        SYS_CONSOLE_PRINT("\r\n STA Configuration:\r\n  Channel: %d \r\n  AutoConnect: %d \r\n  SSID: %s \r\n  Passphrase: %s \r\n  Authentication Type: %d (1-Open, 2-WEP, 3-Mixed mode(WPA/WPA2), 4-WPA2, 5-Mixed mode(WPA2/WPA3), 6-WPA3)\r\n\r\n", g_wifiSrvcConfig.staConfig.channel, g_wifiSrvcConfig.staConfig.autoConnect, g_wifiSrvcConfig.staConfig.ssid, g_wifiSrvcConfig.staConfig.psk, g_wifiSrvcConfig.staConfig.authType);
     }
 }
 
@@ -569,7 +569,7 @@ static uint32_t SYS_WIFI_ExecuteBlock
 	static bool provConnStatus = false;
  
     if (&g_wifiSrvcObj == (SYS_WIFI_OBJ*) wifiSrvcObj)
-    {    
+    {
         switch (wifiSrvcObj->wifiSrvcStatus) 
         {
             case SYS_WIFI_STATUS_INIT:

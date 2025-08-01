@@ -29,8 +29,6 @@
  * TERMS.
  */
 
-//#include "cloud_wifi_config.h"
-
 #ifndef CLOUD_CONFIG_GCP
 
 #include "cloud_wifi_ecc_process.h"
@@ -41,14 +39,9 @@
 #include "ecc_types.h"
 #include "atcacert/atcacert_client.h"
 #include "atcacert/atcacert_pem.h"
-//#include "drv/driver/m2m_periph.h"
-//#include "drv/driver/m2m_types.h"
 #include "m2m_types.h"
-//#include "drv/driver/m2m_wifi.h"
-//#include "../drv/common/nm_common.h"
 #include "nm_common.h"
 #include "nm_debug.h"
-//#include "kta_handler.h"
 #ifdef CLOUD_CONNECT_WITH_MCHP_CERTS
 #include "tng/tng_atcacert_client.h"
 #include "tng/tng_atca.h"
@@ -60,9 +53,6 @@
 
 #include <wolfssl/internal.h>
 
-//static uint16_t g_ecdh_key_slot[] = { 2 };
-//! Index into the ECDH private key slots array
-//static uint32_t g_ecdh_key_slot_index = 0;
 uint8_t subject_key_id[20];
 
 #define MAX_TLS_CERT_LENGTH         1024
@@ -93,45 +83,6 @@ static const char* bin2hex(const void* data, size_t data_size)
     buf[data_size * 2] = 0;
 
     return buf;
-}
-
-/** \brief Populate the buffer with the client id */
-int config_get_client_id(char* buf, size_t buflen)
-{
-    char config_thing_id[130];
-    if (buf && buflen)
-    {
-        int rv;
-
-#if defined(CLOUD_CONFIG_GCP)
-        rv = snprintf(buf, buflen, "projects/%s/locations/%s/registries/%s/devices/d%s",
-                      config_gcp_project_id, config_gcp_region_id, config_gcp_registry_id, config_thing_id);
-#elif defined(CLOUD_CONFIG_AWS)
-    #ifdef CLOUD_CONNECT_WITH_CUSTOM_CERTS
-        //extern uint8_t subject_key_id[20];
-
-        for (int i = 0; i < 20; i++)
-        {
-            config_thing_id[i * 2 + 0] = "0123456789abcdef"[subject_key_id[i] >> 4];
-            config_thing_id[i * 2 + 1] = "0123456789abcdef"[subject_key_id[i] & 0x0F];
-        }
-        config_thing_id[20 * 2] = 0; // Add terminating null
-    #endif
-        rv = snprintf(buf, buflen, "%s", config_thing_id);
-        SYS_CONSOLE_PRINT(TERM_GREEN"Client ID: %s\r\n", buf);
-#elif defined(CLOUD_CONFIG_AZURE)
-        rv = snprintf(buf, buflen, "sn%s", config_thing_id);
-#else
-    #error "Cloud config should be defined"
-#endif
-
-        if (0 < rv && rv < buflen)
-        {
-            buf[rv] = 0;
-            return 0;
-        }
-    }
-    return -1;
 }
 
 static int8_t certs_append_file_buf(uint32_t* buffer32, uint32_t buffer_size,

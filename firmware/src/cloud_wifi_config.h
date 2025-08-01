@@ -38,8 +38,6 @@
 #include "project_config.h"
 #include "tmg_conf.h"
 
-#define WLAN_AUTH_WPA_PSK
-
 #define WLAN_SSID                                WIFI_SSID
 #define WLAN_PSK                                 WIFI_PWD
 #if !defined(WLAN_SSID) || !defined(WLAN_PSK)
@@ -47,6 +45,7 @@
             Uncomment defines and replace xxxxxxxxxx with SSID and Password!
 #endif
 
+#define APP_CFG_WITH_MQTT_API
 
 #ifdef CLOUD_CONFIG_GCP
 #include "../../google_connect.h"
@@ -78,17 +77,6 @@
 
 #define WIFI_UPDATE_PERIOD          TIMER_UPDATE_PERIOD
 #define CLIENT_UPDATE_PERIOD        TIMER_UPDATE_PERIOD
-
-
-/* Functions to retrieve configuration data */
-int config_get_ssid(char* buf, size_t buflen);
-int config_get_password(char* buf, size_t buflen);
-int config_get_client_id(char* buf, size_t buflen);
-int config_get_client_username(char* buf, size_t buflen);
-int config_get_client_password(char* buf, size_t buflen);
-int config_get_client_pub_topic(char* buf, size_t buflen);
-int config_get_client_sub_topic(char* buf, size_t buflen);
-int config_set_thing_id(void);
 
 
 #endif /* CLOUD_WIFI_CONFIG_H_ */

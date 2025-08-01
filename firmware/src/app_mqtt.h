@@ -50,6 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 #include <stdint.h>
 #include <stddef.h>
+#include "app.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -64,6 +65,7 @@ int32_t APP_MQTT_Subscribe(void);
 int APP_MQTT_GetClientPubTopic(char* buf, size_t buflen);
 int APP_MQTT_GetClientSubTopic(char* buf, size_t buflen);
 int APP_MQTT_GetClientId(char* buf, size_t buflen);
+void APP_MQTT_CheckLedStates(void);
 
 /*******************************************************************************
  End of File

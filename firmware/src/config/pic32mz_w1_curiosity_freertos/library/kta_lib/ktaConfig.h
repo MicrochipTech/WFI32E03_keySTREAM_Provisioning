@@ -53,16 +53,16 @@ extern "C" {
 /* -------------------------------------------------------------------------- */
 /* IMPORTS                                                                    */
 /* -------------------------------------------------------------------------- */
-//#include "system/console/sys_console.h"
+#include "tmg_conf.h"
     
 /* -------------------------------------------------------------------------- */
 /* CONSTANTS, TYPES, ENUM                                                     */
 /* -------------------------------------------------------------------------- */
 /** @brief keySTREAM PROD CoAP Url. */
-#define C_KTA_APP__KEYSTREAM_HOST_COAP_URL       (const uint8_t*)"icpp.mss.iot.kudelski.com"
+#define C_KTA_APP__KEYSTREAM_HOST_COAP_URL       KEYSTREAM_COAP_URL
 
 /** @brief keySTREAM PROD http Url. */
-#define C_KTA_APP__KEYSTREAM_HOST_HTTP_URL       (const uint8_t*)"icph.mss.iot.kudelski.com"
+#define C_KTA_APP__KEYSTREAM_HOST_HTTP_URL       KEYSTREAM_HTTP_URL
 
 /** @brief L1 Segmentation Seed of CIE. */
 #define C_KTA_APP__L1_SEG_SEED_CIE          {0x2b, 0x2b, 0x42, 0x6e, 0x10, 0x35, 0xad, 0x6b,\
@@ -72,11 +72,11 @@ extern "C" {
 #define C_KTA_APP__L1_SEG_SEED              C_KTA_APP__L1_SEG_SEED_CIE
 
 /** @brief Device profile public uid of keySTREAM. */
-#define C_KTA_APP__DEVICE_PUBLIC_UID        ("FDHK:TM-DC-EVALUATION")
+#define C_KTA_APP__DEVICE_PUBLIC_UID        KEYSTREAM_DEVICE_PUBLIC_PROFILE_UID
 
 /** @brief Application log */
 #define C_KTA_APP__LOG               printf
-//#define C_KTA_APP__LOG(fmt, ...)     SYS_CONSOLE_PRINT(fmt, ##__VA_ARGS__)
+
 /* -------------------------------------------------------------------------- */
 /* VARIABLES                                                                  */
 /* -------------------------------------------------------------------------- */

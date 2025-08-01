@@ -707,7 +707,7 @@ TCPIP_DNS_RESULT SYS_NET_DNS_Resolve(SYS_NET_Handle *hdl)
 
         return result;
     }
-SYS_CONSOLE_MESSAGE(TERM_GREEN"-"TERM_RESET);
+
     /* Wait for the DNS Client to resolve the Host Name */
     SYS_NET_SetInstStatus(hdl, SYS_NET_STATUS_RESOLVING_DNS);
 
@@ -1337,7 +1337,6 @@ static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
             }
             return;
         }
-        //SYS_CONSOLE_MESSAGE(" 3\r\n");
         break;
     }
 #ifdef SYS_NET_TLS_ENABLED		
