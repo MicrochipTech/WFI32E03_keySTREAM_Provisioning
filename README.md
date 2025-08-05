@@ -144,7 +144,7 @@ After that, the application is waiting for incoming MQTT messages to change the 
 - Create AWS IoT Security Policy:
   - AWS &rarr;  IoT Core &rarr; Security &rarr; Policies &rarr; Create policy
   - Enter a policy name, for example <i>WFI32E03_control_LEDs_Policy</i>
-  - Set the minimal policy statements via the Builder or use JSON format such as:<br>
+  - Set the minimal policy statements via the Builder or use JSON format such as:<br><br>
     ```xml
     {
       "Version": "2012-10-17",
@@ -185,16 +185,16 @@ After that, the application is waiting for incoming MQTT messages to change the 
   - Enter a thing name, for example <i>WFI32E03_control_LEDs</i> and select <i>No shadow</i> as the device shadow
   - Choose <i>Auto-generate a new certificate (recommended)</i>
   - Selected the desired policy and create the thing
-  - <b>Importent: One time possibility to download all certificates and keys!</b>
+  - <b>Important: One time possibility to download all certificates and keys!</b>
 - Set-up MQTT-Explorer:
   - Enter a connection name and make sure the settings are the same as shown below<br>
-<img src="images/MqttExplorer_Connect.png" style="width: 500; display: left; margin: auto;">
+<img src="images/MqttExplorer_Connect.png" style="width: 500; display: left; margin: auto;"><br>
   - Choose <i>ADVANCED</i> and add # to subscribe to all MQTT topics
-  - The <i>MQTT Client ID</i> must be same as used as AWS thing name, e.g. <i>WFI32E03_control_LEDs</i><br>
-<img src="images/MqttExplorer_Advanced.png" style="width: 500; display: left; margin: auto;">
-  - Choose <i>CERTIFICATES</i> and select the previously downloaded certificates and key<br>
-<img src="images/MqttExplorer_Certificates.png" style="width: 500; display: left; margin: auto;">
-- Establish a test connection to Amazon Web Services<br>
+  - The <i>MQTT Client ID</i> must be same as used as AWS thing name, e.g. <i>WFI32E03_control_LEDs</i><br><br>
+<img src="images/MqttExplorer_Advanced.png" style="width: 500; display: left; margin: auto;"><br>
+  - Choose <i>CERTIFICATES</i> and select the previously downloaded certificates and key<br><br>
+<img src="images/MqttExplorer_Certificates.png" style="width: 500; display: left; margin: auto;"><br>
+  - Establish a test connection to Amazon Web Services<br>
 
 #### <u>others</u>
   - Microchip Trust Platform Design Suite (TPDS)
@@ -250,4 +250,5 @@ Device' terminal printings during MQTT message exchange.<br><br>
 - [Amazon Web Services (AWS)](https://console.aws.amazon.com/console/home?nc2=h_ct&src=header-signin) login<br>
 - Kudelski IoT [keySTREAM](https://www.kudelski-iot.com/services-and-systems/microchip) open account<br>
 - Video Tutorial ["How to Set up the ECC608 TrustMANAGER with keySTREAM from Kudelski IoT"](https://www.youtube.com/watch?v=7_13wIr6eRU&t=2s)<br><br>
+
 [TOP](#contents)
