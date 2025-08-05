@@ -86,7 +86,7 @@ After that, the application is waiting for incoming MQTT messages to change the 
 #### <u>PIC32 WFI32 2.0 Curiosity Board</u>
 
   - Connect the ATECC608 TRUST and PIC32 WFI32 2.0 Curiosity board via mikroBUS&trade; header (J200)<br><br>
-  <img src="images/Pic32Wfi32.png" style="width: 160; display: block; margin: auto; float: center"><br>
+  <img src="images/Pic32Wfi32.png" style="width:200px; height:141px; display: block; margin: auto; float: center"><br>
   - For normal operations set the Power Source Selection Jumper (J202) to V<sub>BUS</sub>-VIN (5-6), if the demo software has been already programmed to the device
   - Connect the Target VBUS Micro-B Connector (J204) on the board to the computer using a micro USB cable
   - On the GPIO Header (J207), connect U1RX (PIN 13) and U1TX (PIN 23) to TX and RX pin of any USB to UART converter. When using FTDI chips, connect GND (PIN 17) additionally.
