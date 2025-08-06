@@ -86,7 +86,7 @@ After that, the application is waiting for incoming MQTT messages to change the 
 #### <u>PIC32 WFI32 2.0 Curiosity Board</u>
 
   - Connect the ATECC608 TRUST and PIC32 WFI32 2.0 Curiosity board via mikroBUS&trade; header (J200)<br><br>
-  <img src="images/Pic32Wfi32.png" style="max-width:30%; display: block; margin: auto; float: center"><br>
+  <img src="images/Pic32Wfi32.png" width=300 style="display: block; margin: auto; float: center"><br>
   - For normal operations set the Power Source Selection Jumper (J202) to V<sub>BUS</sub>-VIN (5-6), if the demo software has been already programmed to the device
   - Connect the Target VBUS Micro-B Connector (J204) on the board to the computer using a micro USB cable
   - On the GPIO Header (J207), connect U1RX (PIN 13) and U1TX (PIN 23) to TX and RX pin of any USB to UART converter. When using FTDI chips, connect GND (PIN 17) additionally.
@@ -224,7 +224,7 @@ The Harmony MCC <i>Project Graph</i>'s below depicts the components utilized in 
 
 At first, establish a connection to AWS via MQTT-Explorer. Now power-up the <i>PIC32 WFI32 2.0 Curiosity Board</i> and wait for a successful connection to AWS as well as a successful MQTT message publication. The application should print the following information to the connected terminal.<br><br>
 <img src="images/TerminalOut_KeyStream.png" style="width: 500; display: left; margin: auto;"><br><br>
-In case the device has been renewed or refurbished an intermediate step is printed additionally.<br><br>
+In case the device has been renewed or refurbished intermediate steps are printed additionally.<br><br>
 <img src="images/TerminalOut_KeyStream_Refurbed.png" style="width: 350; display: left; margin: auto;"><br><br>
 On successful device connection to AWS, MQTT-Explorer shows the received messages, but only previously subscribed to, related to the specific issuer. <br><br>
 <img src="images/MqttExplorer_DeviceDefaultState.png" style="width: 500; display: left; margin: auto;"><br>
